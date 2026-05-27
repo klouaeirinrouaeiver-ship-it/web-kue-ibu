@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kue Ibu | Kue Rumahan Premium Samarinda</title>
+  <meta name="description" content="Kue dan roti buatan tangan dengan bahan organik pilihan. Homemade premium dari Samarinda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:        #FDF6EC;
+      --cream-dark:   #F0DEC4;
+      --espresso:     #2C1810;
+      --brown:        #5C3317;
+      --honey:        #C8842A;
+      --honey-light:  #E8A84A;
+      --caramel:      #B8895A;
+      --warm-white:   #FFFBF5;
+      --text:         #2C1810;
+      --text-light:   #8B6E5A;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Outfit', sans-serif;
+      --r:            16px;
+      --shadow:       0 8px 40px rgba(44,24,16,.10);
+      --shadow-lg:    0 20px 60px rgba(44,24,16,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ──────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      transition: all .4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(253,246,236,.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 2px 24px rgba(44,24,16,.07);
+      padding: 1rem 3rem;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.7rem; font-weight: 700;
+      color: #fff; text-decoration: none; letter-spacing: .5px;
+      transition: color .4s;
+    }
+    .nav-logo span { color: var(--honey-light); }
+    .nav.scrolled .nav-logo { color: var(--espresso); }
+    .nav.scrolled .nav-logo span { color: var(--honey); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: .88rem; font-weight: 500; letter-spacing: .5px;
+      color: rgba(255,255,255,.82); text-decoration: none;
+      transition: color .3s;
+    }
+    .nav.scrolled .nav-links a { color: var(--text-light); }
+    .nav-links a:hover { color: var(--honey-light); }
+    .nav.scrolled .nav-links a:hover { color: var(--honey); }
+
+    .nav-cta {
+      background: var(--honey) !important; color: #fff !important;
+      padding: .5rem 1.3rem !important; border-radius: 50px;
+      font-weight: 600 !important; transition: background .3s, transform .2s !important;
+    }
+    .nav-cta:hover { background: var(--honey-light) !important; transform: translateY(-1px); }
+
+    @media(max-width:768px){
+      .nav { padding: 1rem 1.5rem; }
+      .nav.scrolled { padding: .8rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1920&h=1080&q=80');
+      background-size: cover; background-position: center;
+      filter: brightness(.55);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(130deg, rgba(44,24,16,.72) 0%, rgba(92,51,23,.38) 55%, rgba(200,132,42,.12) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px; margin-left: 10%; padding: 0 2rem;
+      animation: fadeUp .9s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(36px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,132,42,.22); border: 1px solid rgba(232,168,74,.45);
+      color: var(--honey-light); font-size: .78rem; font-weight: 500;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      padding: .38rem 1.1rem; border-radius: 50px; margin-bottom: 1.6rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.1rem;
+    }
+    .hero-title em { font-style: italic; color: var(--honey-light); }
+    .hero-sub {
+      font-size: 1.08rem; color: rgba(255,255,255,.78);
+      font-weight: 300; max-width: 460px; margin-bottom: 2.6rem; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 50px; font-weight: 600; font-size: .93rem; text-decoration: none; transition: all .3s ease; }
+    .btn-solid {
+      background: var(--honey); color: #fff;
+      padding: .88rem 2.1rem;
+      box-shadow: 0 4px 24px rgba(200,132,42,.38);
+    }
+    .btn-solid:hover { background: var(--honey-light); transform: translateY(-2px); box-shadow: 0 8px 36px rgba(200,132,42,.48); }
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,.6); color: #fff;
+      padding: .88rem 2.1rem; backdrop-filter: blur(4px);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.14); border-color: #fff; }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 2; color: rgba(255,255,255,.55); font-size: .72rem;
+      letter-spacing: 2.5px; text-transform: uppercase; text-align: center;
+      animation: bobble 2s ease-in-out infinite;
+    }
+    .hero-scroll::after {
+      content: ''; display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.55), transparent);
+      margin: .5rem auto 0;
+    }
+    @keyframes bobble {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── FEATURES BAND ────────────────────────────────── */
+    .band {
+      background: var(--espresso); padding: 4rem 2rem;
+    }
+    .band-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem;
+    }
+    .band-item { text-align: center; padding: 1.5rem 1rem; color: #fff; }
+    .band-icon { font-size: 2.2rem; display: block; margin-bottom: .9rem; }
+    .band-title {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
+      color: var(--honey-light); margin-bottom: .4rem;
+    }
+    .band-desc { font-size: .87rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+
+    /* ── SHARED SECTION HELPERS ──────────────────────── */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .sec-label {
+      display: inline-block; font-size: .73rem; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--honey);
+      margin-bottom: .65rem;
+    }
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+      color: var(--espresso); line-height: 1.13;
+    }
+    .sec-title em { font-style: italic; color: var(--honey); }
+    .sec-line {
+      width: 58px; height: 3px; background: var(--honey);
+      border-radius: 2px; margin: 1.2rem 0 1.5rem;
+    }
+    .sec-line.center { margin-left: auto; margin-right: auto; }
+
+    /* reveal animation */
+    .rv { opacity:0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .rv.on { opacity:1; transform: translateY(0); }
+    .d1{ transition-delay:.08s } .d2{ transition-delay:.16s } .d3{ transition-delay:.24s }
+    .d4{ transition-delay:.32s } .d5{ transition-delay:.40s } .d6{ transition-delay:.48s }
+
+    /* ── PRODUCTS ─────────────────────────────────────── */
+    .products { background: var(--warm-white); }
+    .products-head { text-align: center; margin-bottom: 3.5rem; }
+    .products-head p { color: var(--text-light); max-width: 440px; margin: 0 auto; font-size: .93rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ─ PRODUCT CARD ─ */
+    .card {
+      background: #fff; border-radius: var(--r);
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: transform .35s cubic-bezier(.175,.885,.32,1.275), box-shadow .35s ease;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+    .card-img {
+      position: relative; overflow: hidden; aspect-ratio: 4/3;
+      background: var(--cream-dark);
+    }
+    .card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .card:hover .card-img img { transform: scale(1.07); }
+
+    .badge {
+      position: absolute; top: .9rem; left: .9rem;
+      background: var(--honey); color: #fff;
+      font-size: .7rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: .28rem .75rem; border-radius: 50px;
+    }
+
+    .card-body { padding: 1.4rem 1.5rem 1.5rem; }
+    .card-cat {
+      font-size: .72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--caramel); margin-bottom: .4rem;
+    }
+    .card-name {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+      color: var(--espresso); margin-bottom: .45rem; line-height: 1.25;
+    }
+    .card-desc { font-size: .87rem; color: var(--text-light); margin-bottom: 1.2rem; line-height: 1.65; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; }
+    .card-price { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--honey); }
+    .card-weight { font-size: .76rem; color: var(--text-light); margin-top: -3px; }
+    .card-btn {
+      background: var(--espresso); color: #fff; border: none;
+      padding: .58rem 1.25rem; border-radius: 50px;
+      font-size: .85rem; font-weight: 500; cursor: pointer;
+      transition: background .3s, transform .2s;
+      font-family: var(--font-body);
+    }
+    .card-btn:hover { background: var(--honey); transform: scale(1.04); }
+
+    /* ── ABOUT ────────────────────────────────────────── */
+    .about { background: var(--cream); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    @media(max-width:768px){ .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .about-img-wrap {
+      position: relative; border-radius: var(--r);
+      overflow: visible;
+    }
+    .about-img-wrap img {
+      width: 100%; border-radius: var(--r);
+      aspect-ratio: 4/5; object-fit: cover; box-shadow: var(--shadow);
+    }
+    .about-badge {
+      position: absolute; bottom: 1.8rem; right: -1.8rem;
+      background: var(--honey); color: #fff;
+      padding: 1.2rem 1.6rem; border-radius: var(--r); box-shadow: var(--shadow);
+      text-align: center; min-width: 120px;
+    }
+    .about-badge .num {
+      font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; line-height: 1;
+    }
+    .about-badge .lbl { font-size: .78rem; font-weight: 500; opacity: .9; }
+    @media(max-width:768px){ .about-badge { right: .8rem; } }
+
+    .about-text p { font-size: .98rem; color: var(--text-light); line-height: 1.82; margin-bottom: 1.3rem; }
+    .signature { font-family: var(--font-display); font-size: 1.9rem; font-style: italic; color: var(--honey); font-weight: 600; }
+
+    /* ── CTA SECTION ─────────────────────────────────── */
+    .cta { background: var(--espresso); text-align: center; padding: 6.5rem 2rem; }
+    .cta .sec-title { color: #fff; }
+    .cta .sec-title em { color: var(--honey-light); }
+    .cta-desc { font-size: 1.05rem; color: rgba(255,255,255,.6); max-width: 460px; margin: 0 auto 2.8rem; font-weight: 300; line-height: 1.75; }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: #25D366; color: #fff;
+      padding: 1rem 2.6rem; border-radius: 50px;
+      font-weight: 600; font-size: 1.05rem; text-decoration: none;
+      box-shadow: 0 4px 28px rgba(37,211,102,.32);
+      transition: all .3s ease;
+    }
+    .btn-wa:hover { background: #20c05a; transform: translateY(-3px); box-shadow: 0 8px 40px rgba(37,211,102,.4); }
+    .btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: #180D08; color: rgba(255,255,255,.45);
+      padding: 2.5rem 2rem; text-align: center; font-size: .875rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.9rem; font-weight: 700;
+      color: #fff; display: block; margin-bottom: .4rem;
+    }
+    footer a { color: var(--honey); text-decoration: none; }
+    footer p { margin-top: .2rem; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Kue <span>Ibu</span></a>
+  <ul class="nav-links">
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#tentang">Tentang Kami</a></li>
+    <li><a href="#pesan" class="nav-cta">Pesan Sekarang</a></li>
+  </ul>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Homemade · Samarinda</div>
+    <h1 class="hero-title">Dibuat dengan<br><em>Cinta &amp; Kehangatan</em></h1>
+    <p class="hero-sub">
+      Setiap gigitan membawa kenangan rumah. Kue dan roti buatan tangan dengan bahan organik pilihan, resep warisan yang tak lekang oleh waktu.
+    </p>
+    <div class="hero-btns">
+      <a href="#produk" class="btn btn-solid">
+        Lihat Produk
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+      <a href="#pesan" class="btn btn-ghost">Pesan Sekarang</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FEATURES BAND
+════════════════════════════════════════ -->
+<div class="band">
+  <div class="band-grid">
+    <div class="band-item rv">
+      <span class="band-icon">🌿</span>
+      <div class="band-title">Bahan Organik</div>
+      <div class="band-desc">Dipilih langsung dari sumber terpercaya, bebas bahan pengawet.</div>
+    </div>
+    <div class="band-item rv d1">
+      <span class="band-icon">👐</span>
+      <div class="band-title">Buatan Tangan</div>
+      <div class="band-desc">Setiap produk dibuat dengan perhatian dan ketelitian penuh.</div>
+    </div>
+    <div class="band-item rv d2">
+      <span class="band-icon">📦</span>
+      <div class="band-title">Kemasan Cantik</div>
+      <div class="band-desc">Siap hadir sebagai hampers atau bingkisan untuk orang tersayang.</div>
+    </div>
+    <div class="band-item rv d3">
+      <span class="band-icon">🚚</span>
+      <div class="band-title">Pengiriman Lokal</div>
+      <div class="band-desc">Melayani pengiriman di seluruh area Samarinda dan sekitarnya.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PRODUCTS
+════════════════════════════════════════ -->
+<section class="products" id="produk">
+  <div class="container">
+
+    <div class="products-head">
+      <span class="sec-label">Menu Unggulan</span>
+      <h2 class="sec-title">Produk <em>Pilihan Ibu</em></h2>
+      <div class="sec-line center"></div>
+      <p>Semua produk dipanggang segar setiap hari. Pesan sehari sebelumnya untuk hasil terbaik.</p>
+    </div>
+
+    <div class="grid">
+
+      <!-- ═══ PRODUK 1 ═══
+           Untuk mengganti foto: ubah URL pada src="..."
+           Untuk menambah badge: tambahkan <span class="badge">Teks</span> di dalam .card-img -->
+      <div class="card rv">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&h=450&q=80" alt="Kastengel Keju Premium" onerror="this.style.display='none'">
+          <span class="badge">Best Seller</span>
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Kering</div>
+          <h3 class="card-name">Kastengel Keju Premium</h3>
+          <p class="card-desc">Kue keju renyah di luar, lumer di dalam. Taburan edam asli import yang bikin nagih setiap gigitan.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 85.000</div>
+              <div class="card-weight">per 150 g</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Kastengel Keju Premium', 'Rp 85.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRODUK 2 ═══ -->
+      <div class="card rv d1">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1612875893280-26eadb98ba4a?auto=format&fit=crop&w=600&h=450&q=80" alt="Nastar Nanas Klasik" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Kering</div>
+          <h3 class="card-name">Nastar Nanas Klasik</h3>
+          <p class="card-desc">Nastar lembut dengan selai nanas buatan sendiri. Resep keluarga yang sudah teruji dan dicinta generasi.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 75.000</div>
+              <div class="card-weight">per 150 g</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Nastar Nanas Klasik', 'Rp 75.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRODUK 3 ═══ -->
+      <div class="card rv d2">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Sisir Mentega" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Roti</div>
+          <h3 class="card-name">Roti Sisir Mentega</h3>
+          <p class="card-desc">Roti manis klasik dengan olesan mentega gula yang harum dan lembut di mulut. Sempurna untuk sarapan.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 35.000</div>
+              <div class="card-weight">per loaf</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Roti Sisir Mentega', 'Rp 35.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRODUK 4 ═══ -->
+      <div class="card rv d3">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&w=600&h=450&q=80" alt="Putri Salju Vanilla" onerror="this.style.display='none'">
+          <span class="badge">Favorit</span>
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Kering</div>
+          <h3 class="card-name">Putri Salju Vanilla</h3>
+          <p class="card-desc">Kue bulan sabit bertabur gula halus. Lumer di mulut dengan aroma vanilla alami yang menggoda selera.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 75.000</div>
+              <div class="card-weight">per 150 g</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Putri Salju Vanilla', 'Rp 75.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRODUK 5 ═══ -->
+      <div class="card rv d4">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&h=450&q=80" alt="Brownies Fudgy Coklat" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Basah</div>
+          <h3 class="card-name">Brownies Fudgy Coklat</h3>
+          <p class="card-desc">Tekstur fudgy yang legit dengan lapisan coklat leleh. Kaya rasa, cocok untuk segala kesempatan.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 65.000</div>
+              <div class="card-weight">per 400 g</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Brownies Fudgy Coklat', 'Rp 65.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRODUK 6 ═══ -->
+      <div class="card rv d5">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&h=450&q=80" alt="Bolu Kukus Pandan" onerror="this.style.display='none'">
+          <span class="badge">New!</span>
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Basah</div>
+          <h3 class="card-name">Bolu Kukus Pandan</h3>
+          <p class="card-desc">Harum pandan alami, tekstur ringan dan lembut. Mekar sempurna, memuaskan selera keluarga.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 45.000</div>
+              <div class="card-weight">6 pcs</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Bolu Kukus Pandan', 'Rp 45.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!--
+      ╔══════════════════════════════════════════════════════╗
+      ║  💡 CARA TAMBAH PRODUK BARU — salin blok ini!        ║
+      ╠══════════════════════════════════════════════════════╣
+      ║  1. Salin semua baris dari <div class="card rv"> s/d ║
+      ║     </div> penutup terakhirnya                       ║
+      ║  2. Ganti src="..." dengan URL foto produkmu         ║
+      ║  3. Ganti teks card-cat, card-name, card-desc,       ║
+      ║     card-price, card-weight, dan nama di onclick     ║
+      ║  4. Hapus atau ubah badge jika perlu                 ║
+      ╚══════════════════════════════════════════════════════╝
+
+      <div class="card rv">
+        <div class="card-img">
+          <img src="URL_FOTO_PRODUKMU" alt="Nama Produk" onerror="this.style.display='none'">
+          <span class="badge">New!</span>
+        </div>
+        <div class="card-body">
+          <div class="card-cat">Kue Kering / Kue Basah / Roti</div>
+          <h3 class="card-name">Nama Produk</h3>
+          <p class="card-desc">Deskripsi singkat tentang produk ini.</p>
+          <div class="card-foot">
+            <div>
+              <div class="card-price">Rp 00.000</div>
+              <div class="card-weight">berat / jumlah</div>
+            </div>
+            <button class="card-btn" onclick="pesan('Nama Produk', 'Rp 00.000')">Pesan →</button>
+          </div>
+        </div>
+      </div>
+      -->
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="about" id="tentang">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-img-wrap rv">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&h=1000&q=80"
+             alt="Ibu sedang membuat kue"
+             onerror="this.style.background='var(--cream-dark)'; this.style.minHeight='500px'">
+        <div class="about-badge">
+          <div class="num">10+</div>
+          <div class="lbl">Tahun Pengalaman</div>
+        </div>
+      </div>
+
+      <div class="about-text rv d1">
+        <span class="sec-label">Cerita Kami</span>
+        <h2 class="sec-title">Dari Dapur Rumah<br><em>ke Meja Makanmu</em></h2>
+        <div class="sec-line"></div>
+        <p>
+          Bermula dari dapur kecil yang penuh dengan aroma mentega dan gula, Ibu mulai memasak kue-kue istimewa untuk keluarga dan tetangga sekitar. Satu per satu resep warisan dipelajari, dijaga, dan disempurnakan dengan penuh cinta.
+        </p>
+        <p>
+          Dengan lebih dari satu dekade pengalaman, setiap produk yang kami buat selalu mengutamakan kualitas dan keikhlasan. Bahan-bahan segar dipilih setiap hari, dan proses pembuatan dilakukan dengan tangan yang penuh kasih sayang.
+        </p>
+        <p>
+          Kami percaya makanan terbaik bukan hanya soal resep yang tepat — tapi juga hati yang tulus di balik setiap adonan.
+        </p>
+        <div class="signature">— Kue Ibu 🤍</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     CTA / ORDER
+════════════════════════════════════════ -->
+<section class="cta" id="pesan">
+  <div class="container">
+    <span class="sec-label" style="color:var(--honey-light)">Siap Memesan?</span>
+    <h2 class="sec-title" style="margin-top:.5rem">Pesan Langsung<br><em>via WhatsApp</em></h2>
+    <p class="cta-desc">
+      Hubungi kami untuk tanya ketersediaan, kustomisasi ukuran, atau paket hampers spesial. Kami siap melayani dengan sepenuh hati.
+    </p>
+    <a href="https://wa.me/6281234567890?text=Halo%20Kue%20Ibu!%20Saya%20ingin%20memesan%20produk."
+       class="btn-wa" target="_blank" id="wa-main">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.089 1.51 5.815L0 24l6.385-1.486A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.366l-.36-.213-3.791.882.923-3.692-.234-.38A9.819 9.819 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
+      </svg>
+      Chat WhatsApp Sekarang
+    </a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <span class="footer-logo">Kue Ibu</span>
+  <p>© 2025 Kue Rumahan Premium · Samarinda, Kalimantan Timur</p>
+  <p style="margin-top:.25rem; font-size:.8rem;">Dibuat dengan ❤️ untuk Ibu tercinta</p>
+</footer>
+
+
+<script>
+  /* ─ Navbar scroll ─ */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* ─ Scroll reveal ─ */
+  const obs = new IntersectionObserver(entries =>
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('on')),
+    { threshold: .12 }
+  );
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  /* ─ WhatsApp order ─
+     ⚠️  GANTI NOMOR WA: ubah 6281234567890 menjadi nomor WA ibu
+         Format: 62 + nomor tanpa angka 0 di depan
+         Contoh: 0812-3456-7890 → 6281234567890               */
+  const WA_NUMBER = '6281234567890';
+
+  function pesan(nama, harga) {
+    const teks = encodeURIComponent(
+      `Halo Kue Ibu! 👋\n\nSaya ingin memesan:\n\n🧁 *${nama}* – ${harga}\n\nMohon info ketersediaan dan cara pembayarannya ya, Terima kasih! 🙏`
+    );
+    window.open(`https://wa.me/${WA_NUMBER}?text=${teks}`, '_blank');
+  }
+
+  /* Update semua link WA dengan nomor yang sudah di-set */
+  document.querySelectorAll('[href*="6281234567890"]').forEach(el => {
+    el.href = el.href.replace('6281234567890', WA_NUMBER);
+  });
+</script>
+
+</body>
+</html>
