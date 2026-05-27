@@ -1,1227 +1,1227 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kue dan roti buatan tangan dengan bahan organik pilihan. Homemade premium dari Samarinda.">
-<title>Dapur R&D | Kue Rumahan Premium Samarinda</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --cream: #FAF7F2;
-    --cream-dark: #F2EDE3;
-    --brown: #6B4A2A;
-    --brown-light: #9B7558;
-    --brown-dark: #3D2810;
-    --rose: #C97B6B;
-    --rose-light: #E8BEB6;
-    --rose-pale: #F7EDE9;
-    --green: #4A6741;
-    --green-light: #EBF0E9;
-    --text-dark: #2A1F14;
-    --text-mid: #5C4A35;
-    --text-light: #9B8878;
-    --border: rgba(107, 74, 42, 0.15);
-    --shadow: 0 2px 20px rgba(107, 74, 42, 0.08);
-    --shadow-hover: 0 8px 40px rgba(107, 74, 42, 0.15);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.1rem 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: transparent;
-    transition: background 0.35s, box-shadow 0.35s;
-  }
-  nav.scrolled {
-    background: rgba(250, 247, 242, 0.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 2px 20px rgba(107,74,42,0.08);
-  }
-
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .nav-logo .logo-kue { color: #FAF7F2; }
-  .nav-logo .logo-ibu { color: #D4950A; font-style: italic; }
-  nav.scrolled .nav-logo .logo-kue { color: var(--brown-dark); }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: rgba(250,247,242,0.85);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: #FAF7F2; }
-  nav.scrolled .nav-links a { color: var(--text-mid); }
-  nav.scrolled .nav-links a:hover { color: var(--brown); }
-
-  .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.6rem 1.4rem;
-    background: #D4950A;
-    color: white !important;
-    border-radius: 100px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { background: #b57d08 !important; transform: translateY(-1px); }
-  nav.scrolled .nav-cta { background: #D4950A; color: white !important; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg-img {
-    position: absolute;
-    inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1600&h=900&q=80');
-    background-size: cover;
-    background-position: center 60%;
-    z-index: 0;
-  }
-  .hero-bg-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(30,18,8,0.72) 0%,
-      rgba(30,18,8,0.45) 55%,
-      rgba(30,18,8,0.15) 100%
-    );
-    z-index: 1;
-  }
-
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 6rem 2.5rem 3rem;
-    position: relative;
-    z-index: 2;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #D4950A;
-    background: rgba(212,149,10,0.15);
-    border: 1px solid rgba(212,149,10,0.4);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 1.75rem;
-    animation: fadeUp 0.6s ease both;
-    width: fit-content;
-  }
-  .hero-tag span { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #D4950A; }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.12;
-    color: #FAF7F2;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  .hero h1 em { font-style: italic; color: #D4950A; display: block; }
-
-  .hero-desc {
-    max-width: 460px;
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(250,247,242,0.75);
-    line-height: 1.75;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 0.875rem;
-    flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .hero-scroll span {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(250,247,242,0.45);
-  }
-  .hero-scroll-line {
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, rgba(250,247,242,0.4), transparent);
-    animation: scrollPulse 2s ease infinite;
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.1); }
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    background: #D4950A;
-    color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 100px;
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
-  }
-  .btn-primary:hover { background: #b57d08; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,149,10,0.4); }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    background: transparent;
-    color: rgba(250,247,242,0.9);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 100px;
-    border: 1.5px solid rgba(250,247,242,0.35);
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: rgba(250,247,242,0.7); background: rgba(250,247,242,0.08); }
-
-  /* FEATURES STRIP (dark brown bar) */
-  .features-strip {
-    background: #2A1608;
-    padding: 3.5rem 2.5rem;
-  }
-  .features-strip-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    text-align: center;
-  }
-  .feature-item { }
-  .feature-icon { font-size: 2rem; display: block; margin-bottom: 0.875rem; }
-  .feature-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #D4950A;
-    margin-bottom: 0.5rem;
-  }
-  .feature-desc {
-    font-size: 0.8125rem;
-    font-weight: 300;
-    color: rgba(250,247,242,0.55);
-    line-height: 1.6;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SECTION */
-  section { padding: 5rem 2rem; }
-
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
-    color: var(--brown-dark);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  .section-title em { font-style: italic; color: var(--rose); }
-
-  .section-desc {
-    font-size: 0.9375rem;
-    font-weight: 300;
-    color: var(--text-mid);
-    max-width: 500px;
-  }
-
-  .section-header {
-    max-width: 1100px;
-    margin: 0 auto 3rem;
-  }
-
-  /* PRODUK */
-  #produk {
-    background: white;
-  }
-
-  /* TABS */
-  .product-tabs {
-    max-width: 1100px;
-    margin: 0 auto 2.5rem;
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .tab-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.25rem;
-    background: transparent;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-mid);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .tab-btn:hover { border-color: var(--brown-light); color: var(--brown); background: var(--cream); }
-  .tab-btn.active { background: var(--brown); border-color: var(--brown); color: var(--cream); }
-  .tab-btn .tab-count {
-    font-size: 0.75rem;
-    font-weight: 400;
-    opacity: 0.7;
-  }
-  .tab-btn.active .tab-count { opacity: 0.8; }
-
-  /* MIN ORDER BANNER */
-  .min-order-notice {
-    max-width: 1100px;
-    margin: 0 auto 1.75rem;
-    display: none;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1.25rem;
-    background: #FFF8F0;
-    border: 1.5px solid rgba(186,117,23,0.25);
-    border-radius: 12px;
-    font-size: 0.875rem;
-    color: #854F0B;
-  }
-  .min-order-notice.show { display: flex; }
-  .min-order-notice .notice-icon {
-    font-size: 1.25rem;
-    flex-shrink: 0;
-  }
-  .min-order-notice strong { font-weight: 500; }
-
-  /* PRODUCT GRID */
-  .product-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .product-panel { display: none; }
-  .product-panel.active { display: block; }
-
-  /* CARD */
-  .product-card {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.3s;
-    position: relative;
-  }
-  .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-
-  .card-img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .card-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    text-transform: uppercase;
-  }
-  .badge-bestseller { background: var(--brown); color: var(--cream); }
-  .badge-new { background: var(--green); color: white; }
-  .badge-fav { background: var(--rose); color: white; }
-
-  .card-body {
-    padding: 1.25rem;
-  }
-
-  .card-cat {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    margin-bottom: 0.4rem;
-  }
-
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
-
-  .card-desc {
-    font-size: 0.8375rem;
-    font-weight: 300;
-    color: var(--text-mid);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .card-price {
-    display: flex;
-    flex-direction: column;
-  }
-  .card-price strong {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    line-height: 1;
-  }
-  .card-price span {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    font-weight: 300;
-    margin-top: 2px;
-  }
-
-  /* Min order badge on card */
-  .card-min-order {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: #854F0B;
-    background: #FFF3E0;
-    border: 1px solid rgba(186,117,23,0.2);
-    border-radius: 8px;
-    padding: 0.3rem 0.6rem;
-    margin-bottom: 0.75rem;
-  }
-
-  /* ===== QUANTITY COUNTER ===== */
-  .card-qty-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.875rem;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .qty-counter {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .qty-btn {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--brown);
-    transition: background 0.15s, color 0.15s;
-    line-height: 1;
-    flex-shrink: 0;
-    user-select: none;
-  }
-  .qty-btn:hover { background: var(--cream-dark); color: var(--brown-dark); }
-  .qty-btn:active { background: var(--border); }
-  .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-  .qty-value {
-    min-width: 2rem;
-    text-align: center;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--brown-dark);
-    user-select: none;
-  }
-
-  .card-order-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.625rem 1rem;
-    background: transparent;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--brown);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .card-order-btn:hover { background: var(--brown); border-color: var(--brown); color: var(--cream); }
-  .card-order-btn:disabled,
-  .card-order-btn.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-    cursor: not-allowed;
-  }
-
-  /* Roti: total counter summary bar */
-  .roti-summary-bar {
-    max-width: 1100px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.875rem 1.25rem;
-    background: #F0FFF4;
-    border: 1.5px solid rgba(74,103,65,0.25);
-    border-radius: 12px;
-    flex-wrap: wrap;
-  }
-  .roti-summary-bar .summary-text {
-    font-size: 0.875rem;
-    color: #2E5E25;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .roti-summary-bar .summary-count {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #2E5E25;
-  }
-  .roti-summary-bar .summary-count.not-met {
-    color: #854F0B;
-  }
-  .roti-summary-bar .summary-hint {
-    font-size: 0.8rem;
-    color: #5C8A52;
-    font-weight: 300;
-  }
-  .roti-summary-bar .summary-hint.not-met {
-    color: #9B6A1A;
-  }
-  .roti-order-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.625rem 1.25rem;
-    background: #4A6741;
-    border: none;
-    border-radius: 100px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8375rem;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .roti-order-btn:hover { background: #3a5233; transform: translateY(-1px); }
-  .roti-order-btn:disabled,
-  .roti-order-btn.disabled {
-    background: #ccc;
-    opacity: 0.6;
-    pointer-events: none;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* ABOUT */
-  #tentang { background: var(--cream); }
-
-  .about-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .about-img-wrap {
-    position: relative;
-  }
-  .about-img {
-    width: 100%;
-    border-radius: 24px;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    display: block;
-  }
-  .about-badge {
-    position: absolute;
-    bottom: 2rem;
-    right: -1.5rem;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1rem 1.25rem;
-    box-shadow: var(--shadow);
-    text-align: center;
-  }
-  .about-badge-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brown-dark);
-    line-height: 1;
-    display: block;
-  }
-  .about-badge-text { font-size: 0.75rem; color: var(--text-light); font-weight: 300; }
-
-  .about-content p {
-    font-size: 0.9375rem;
-    font-weight: 300;
-    color: var(--text-mid);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-  .about-sig {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.0625rem;
-    color: var(--brown-light);
-    margin-top: 1.5rem;
-    display: block;
-  }
-
-  /* ORDER */
-  #pesan {
-    background: var(--brown-dark);
-    text-align: center;
-    padding: 6rem 2rem;
-  }
-  #pesan .section-label { color: var(--brown-light); }
-  #pesan .section-title { color: var(--cream); }
-  #pesan .section-title em { color: var(--rose-light); }
-  #pesan .section-desc { color: rgba(250,247,242,0.6); margin: 0 auto 2.5rem; max-width: 440px; }
-  #pesan .section-header { margin-bottom: 0; text-align: center; }
-
-  .order-wa-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 1rem 2rem;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    border-radius: 100px;
-    transition: all 0.2s;
-    margin-top: 2.5rem;
-  }
-  .order-wa-btn:hover { background: #1ebe5b; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.3); }
-  .order-wa-btn svg { width: 20px; height: 20px; }
-
-  /* FOOTER */
-  footer {
-    background: var(--brown-dark);
-    border-top: 1px solid rgba(250,247,242,0.08);
-    padding: 2rem;
-    text-align: center;
-  }
-  footer p { font-size: 0.8rem; color: rgba(250,247,242,0.35); font-weight: 300; }
-  footer strong { color: rgba(250,247,242,0.6); font-weight: 400; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.25rem; }
-    .nav-links { display: none; }
-    .features-strip-inner { grid-template-columns: repeat(2, 1fr); }
-    .about-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .about-badge { right: 0; }
-    .product-grid { grid-template-columns: 1fr; }
-    .product-tabs { gap: 0.375rem; }
-    .tab-btn { padding: 0.5rem 0.875rem; font-size: 0.8125rem; }
-    .roti-summary-bar { flex-direction: column; align-items: flex-start; }
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-</style>
-</head>
-<body>
-
-<nav id="navbar">
-  <a href="#" class="nav-logo"><span class="logo-kue">Kue </span><span class="logo-ibu">Ibu</span></a>
-  <ul class="nav-links">
-    <li><a href="#produk">Produk</a></li>
-    <li><a href="#tentang">Tentang Kami</a></li>
-    <li><a href="#pesan" class="nav-cta">Pesan Sekarang</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="beranda">
-  <div class="hero-bg-img"></div>
-  <div class="hero-bg-overlay"></div>
-  <div class="hero-inner">
-    <div class="hero-tag"><span></span> ✦ Homemade &middot; Samarinda</div>
-    <h1>Dibuat dengan<br><em>Cinta &amp; Kehangatan</em></h1>
-    <p class="hero-desc">Setiap gigitan membawa kenangan rumah. Kue dan roti buatan tangan dengan bahan organik pilihan, resep warisan yang tak lekang oleh waktu.</p>
-    <div class="hero-actions">
-      <a href="#produk" class="btn-primary">Lihat Produk ↓</a>
-      <a href="#pesan" class="btn-outline">Pesan Sekarang</a>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="hero-scroll-line"></div>
-  </div>
-</section>
-
-<!-- FEATURES STRIP -->
-<div class="features-strip">
-  <div class="features-strip-inner">
-    <div class="feature-item">
-      <span class="feature-icon">🌿</span>
-      <div class="feature-title">Bahan Organik</div>
-      <div class="feature-desc">Dipilih langsung dari sumber terpercaya, bebas bahan pengawet.</div>
-    </div>
-    <div class="feature-item">
-      <span class="feature-icon">👐</span>
-      <div class="feature-title">Buatan Tangan</div>
-      <div class="feature-desc">Setiap produk dibuat dengan perhatian dan ketelitian penuh.</div>
-    </div>
-    <div class="feature-item">
-      <span class="feature-icon">📦</span>
-      <div class="feature-title">Kemasan Cantik</div>
-      <div class="feature-desc">Siap hadir sebagai hampers atau bingkisan untuk orang tersayang.</div>
-    </div>
-    <div class="feature-item">
-      <span class="feature-icon">🚚</span>
-      <div class="feature-title">Pengiriman Lokal</div>
-      <div class="feature-desc">Melayani pengiriman di seluruh area Samarinda dan sekitarnya.</div>
-    </div>
-  </div>
-</div>
-
-<!-- PRODUK -->
-<section id="produk">
-  <div class="section-header reveal">
-    <p class="section-label">Menu Unggulan</p>
-    <h2 class="section-title">Produk <em>Pilihan Ibu</em></h2>
-    <p class="section-desc">Semua produk dipanggang segar setiap hari. Pesan sehari sebelumnya untuk hasil terbaik.</p>
-  </div>
-
-  <!-- TABS -->
-  <div class="product-tabs reveal">
-    <button class="tab-btn active" onclick="switchTab('roti', this)">
-      🍞 Roti <span class="tab-count">(3 varian)</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('kering', this)">
-      🍪 Kue Kering <span class="tab-count">(3 varian)</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('basah', this)">
-      🎂 Kue Basah <span class="tab-count">(2 varian)</span>
-    </button>
-  </div>
-
-  <!-- MIN ORDER NOTICE -->
-  <div class="min-order-notice show" id="minOrderNotice">
-    <span class="notice-icon">ℹ️</span>
-    <div>
-      <strong>Minimal Pemesanan Roti: 3 buah.</strong>
-      Boleh varian yang sama atau kombinasi varian berbeda &mdash; total minimal 3 buah per pesanan.
-    </div>
-  </div>
-
-  <!-- TAB: ROTI -->
-  <div class="product-panel active" id="panel-roti">
-    <!-- Roti total summary bar -->
-    <div class="roti-summary-bar" id="rotiSummaryBar">
-      <div class="summary-text">
-        🛒 Total pesanan roti:
-        <span class="summary-count not-met" id="rotiTotalCount">0</span>
-        <span class="summary-hint not-met" id="rotiHint">buah &mdash; tambahkan minimal 3 untuk memesan</span>
-      </div>
-      <button class="roti-order-btn disabled" id="rotiOrderBtn" onclick="orderRoti()" disabled>Pesan via WhatsApp →</button>
-    </div>
-
-    <div class="product-grid">
-
-      <!-- Roti Sisir -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Sisir Mentega" loading="lazy">
-        <div class="card-body">
-          <p class="card-cat">Roti</p>
-          <h3 class="card-title">Roti Sisir Mentega</h3>
-          <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
-          <p class="card-desc">Roti manis klasik dengan olesan mentega gula yang harum dan lembut di mulut. Sempurna untuk sarapan.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 35.000</strong>
-              <span>per loaf</span>
-            </div>
-            <div class="qty-counter">
-              <button class="qty-btn" onclick="changeQty('roti-sisir', -1)" aria-label="Kurangi">−</button>
-              <span class="qty-value" id="qty-roti-sisir">0</span>
-              <button class="qty-btn" onclick="changeQty('roti-sisir', 1)" aria-label="Tambah">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Roti Kasur Coklat -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Kasur Coklat" loading="lazy">
-        <div class="card-body">
-          <p class="card-cat">Roti</p>
-          <h3 class="card-title">Roti Kasur Coklat</h3>
-          <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
-          <p class="card-desc">Roti empuk isi coklat meler yang lembut dan harum. Favorit anak-anak dan seluruh keluarga.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 32.000</strong>
-              <span>per loaf</span>
-            </div>
-            <div class="qty-counter">
-              <button class="qty-btn" onclick="changeQty('roti-kasur', -1)" aria-label="Kurangi">−</button>
-              <span class="qty-value" id="qty-roti-kasur">0</span>
-              <button class="qty-btn" onclick="changeQty('roti-kasur', 1)" aria-label="Tambah">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Roti Sobek Susu -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Sobek Susu" loading="lazy">
-        <span class="card-badge badge-bestseller">Best Seller</span>
-        <div class="card-body">
-          <p class="card-cat">Roti</p>
-          <h3 class="card-title">Roti Sobek Susu</h3>
-          <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
-          <p class="card-desc">Tekstur super fluffy dengan aroma susu yang khas. Bisa disobek satu per satu, cocok untuk berbagi.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 38.000</strong>
-              <span>per loaf</span>
-            </div>
-            <div class="qty-counter">
-              <button class="qty-btn" onclick="changeQty('roti-sobek', -1)" aria-label="Kurangi">−</button>
-              <span class="qty-value" id="qty-roti-sobek">0</span>
-              <button class="qty-btn" onclick="changeQty('roti-sobek', 1)" aria-label="Tambah">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TAB: KUE KERING -->
-  <div class="product-panel" id="panel-kering">
-    <div class="product-grid">
-
-      <!-- Kastengel -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&h=450&q=80" alt="Kastengel Keju Premium" loading="lazy">
-        <span class="card-badge badge-bestseller">Best Seller</span>
-        <div class="card-body">
-          <p class="card-cat">Kue Kering</p>
-          <h3 class="card-title">Kastengel Keju Premium</h3>
-          <p class="card-desc">Kue keju renyah di luar, lumer di dalam. Taburan edam asli import yang bikin nagih setiap gigitan.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 85.000</strong>
-              <span>per 150 g</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
-              <div class="qty-counter">
-                <button class="qty-btn" onclick="changeQty('kastengel', -1)" aria-label="Kurangi">−</button>
-                <span class="qty-value" id="qty-kastengel">0</span>
-                <button class="qty-btn" onclick="changeQty('kastengel', 1)" aria-label="Tambah">+</button>
-              </div>
-              <button class="card-order-btn disabled" id="order-kastengel" onclick="orderSingle('kastengel','Kastengel Keju Premium','Rp 85.000','per 150 g')" disabled>Pesan →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Nastar -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1612875893280-26eadb98ba4a?auto=format&fit=crop&w=600&h=450&q=80" alt="Nastar Nanas Klasik" loading="lazy">
-        <div class="card-body">
-          <p class="card-cat">Kue Kering</p>
-          <h3 class="card-title">Nastar Nanas Klasik</h3>
-          <p class="card-desc">Nastar lembut dengan selai nanas buatan sendiri. Resep keluarga yang sudah teruji dan dicinta generasi.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 75.000</strong>
-              <span>per 150 g</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
-              <div class="qty-counter">
-                <button class="qty-btn" onclick="changeQty('nastar', -1)" aria-label="Kurangi">−</button>
-                <span class="qty-value" id="qty-nastar">0</span>
-                <button class="qty-btn" onclick="changeQty('nastar', 1)" aria-label="Tambah">+</button>
-              </div>
-              <button class="card-order-btn disabled" id="order-nastar" onclick="orderSingle('nastar','Nastar Nanas Klasik','Rp 75.000','per 150 g')" disabled>Pesan →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Putri Salju -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&w=600&h=450&q=80" alt="Putri Salju Vanilla" loading="lazy">
-        <span class="card-badge badge-fav">Favorit</span>
-        <div class="card-body">
-          <p class="card-cat">Kue Kering</p>
-          <h3 class="card-title">Putri Salju Vanilla</h3>
-          <p class="card-desc">Kue bulan sabit bertabur gula halus. Lumer di mulut dengan aroma vanilla alami yang menggoda selera.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 75.000</strong>
-              <span>per 150 g</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
-              <div class="qty-counter">
-                <button class="qty-btn" onclick="changeQty('putrisalju', -1)" aria-label="Kurangi">−</button>
-                <span class="qty-value" id="qty-putrisalju">0</span>
-                <button class="qty-btn" onclick="changeQty('putrisalju', 1)" aria-label="Tambah">+</button>
-              </div>
-              <button class="card-order-btn disabled" id="order-putrisalju" onclick="orderSingle('putrisalju','Putri Salju Vanilla','Rp 75.000','per 150 g')" disabled>Pesan →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TAB: KUE BASAH -->
-  <div class="product-panel" id="panel-basah">
-    <div class="product-grid">
-
-      <!-- Brownies -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&h=450&q=80" alt="Brownies Fudgy Coklat" loading="lazy">
-        <div class="card-body">
-          <p class="card-cat">Kue Basah</p>
-          <h3 class="card-title">Brownies Fudgy Coklat</h3>
-          <p class="card-desc">Tekstur fudgy yang legit dengan lapisan coklat leleh. Kaya rasa, cocok untuk segala kesempatan.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 65.000</strong>
-              <span>per 400 g</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
-              <div class="qty-counter">
-                <button class="qty-btn" onclick="changeQty('brownies', -1)" aria-label="Kurangi">−</button>
-                <span class="qty-value" id="qty-brownies">0</span>
-                <button class="qty-btn" onclick="changeQty('brownies', 1)" aria-label="Tambah">+</button>
-              </div>
-              <button class="card-order-btn disabled" id="order-brownies" onclick="orderSingle('brownies','Brownies Fudgy Coklat','Rp 65.000','per 400 g')" disabled>Pesan →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bolu Kukus -->
-      <div class="product-card reveal">
-        <img class="card-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&h=450&q=80" alt="Bolu Kukus Pandan" loading="lazy">
-        <span class="card-badge badge-new">New!</span>
-        <div class="card-body">
-          <p class="card-cat">Kue Basah</p>
-          <h3 class="card-title">Bolu Kukus Pandan</h3>
-          <p class="card-desc">Harum pandan alami, tekstur ringan dan lembut. Mekar sempurna, memuaskan selera keluarga.</p>
-          <div class="card-footer">
-            <div class="card-price">
-              <strong>Rp 45.000</strong>
-              <span>6 pcs</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
-              <div class="qty-counter">
-                <button class="qty-btn" onclick="changeQty('bolukukus', -1)" aria-label="Kurangi">−</button>
-                <span class="qty-value" id="qty-bolukukus">0</span>
-                <button class="qty-btn" onclick="changeQty('bolukukus', 1)" aria-label="Tambah">+</button>
-              </div>
-              <button class="card-order-btn disabled" id="order-bolukukus" onclick="orderSingle('bolukukus','Bolu Kukus Pandan','Rp 45.000','6 pcs')" disabled>Pesan →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TENTANG -->
-<section id="tentang">
-  <div class="about-inner">
-    <div class="about-img-wrap reveal">
-      <img class="about-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&h=1000&q=80" alt="Ibu sedang membuat kue">
-      <div class="about-badge">
-        <span class="about-badge-num">10+</span>
-        <span class="about-badge-text">Tahun Pengalaman</span>
-      </div>
-    </div>
-    <div class="about-content reveal">
-      <p class="section-label">Cerita Kami</p>
-      <h2 class="section-title">Dari Dapur Rumah<br><em>ke Meja Makanmu</em></h2>
-      <p>Bermula dari dapur kecil yang penuh dengan aroma mentega dan gula, Ibu mulai memasak kue-kue istimewa untuk keluarga dan tetangga sekitar. Satu per satu resep warisan dipelajari, dijaga, dan disempurnakan dengan penuh cinta.</p>
-      <p>Dengan lebih dari satu dekade pengalaman, setiap produk yang kami buat selalu mengutamakan kualitas dan keikhlasan. Bahan-bahan segar dipilih setiap hari, dan proses pembuatan dilakukan dengan tangan yang penuh kasih sayang.</p>
-      <p>Kami percaya makanan terbaik bukan hanya soal resep yang tepat &mdash; tapi juga hati yang tulus di balik setiap adonan.</p>
-      <span class="about-sig">— Dapur R&D 🤍</span>
-    </div>
-  </div>
-</section>
-
-<!-- PESAN -->
-<section id="pesan">
-  <div class="section-header reveal">
-    <p class="section-label">Siap Memesan?</p>
-    <h2 class="section-title">Pesan Langsung<br><em>via WhatsApp</em></h2>
-    <p class="section-desc">Hubungi kami untuk tanya ketersediaan, kustomisasi ukuran, atau paket hampers spesial. Kami siap melayani dengan sepenuh hati.</p>
-    <a href="https://wa.me/6281520432660?text=Halo%20Kue%20Ibu!%20Saya%20ingin%20memesan%20produk." class="order-wa-btn" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.089.535 4.05 1.472 5.763L.036 23.8a.5.5 0 00.612.604l6.278-1.649A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.498-5.24-1.37l-.375-.22-3.875 1.017.97-3.75-.243-.388A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Chat WhatsApp Sekarang
-    </a>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 <strong>Dapur R&D</strong> &middot; Kue Rumahan Premium &middot; Samarinda, Kalimantan Timur &nbsp;·&nbsp; Dibuat dengan ❤️ untuk Ibu tercinta</p>
-</footer>
-
-<script>
-  // ========= STATE =========
-  const qtys = {
-    // Roti
-    'roti-sisir':  { val: 0, name: 'Roti Sisir Mentega',     price: 'Rp 35.000', unit: 'per loaf', group: 'roti' },
-    'roti-kasur':  { val: 0, name: 'Roti Kasur Coklat',      price: 'Rp 32.000', unit: 'per loaf', group: 'roti' },
-    'roti-sobek':  { val: 0, name: 'Roti Sobek Susu',        price: 'Rp 38.000', unit: 'per loaf', group: 'roti' },
-    // Kue Kering
-    'kastengel':   { val: 0, name: 'Kastengel Keju Premium', price: 'Rp 85.000', unit: 'per 150 g', group: 'kering' },
-    'nastar':      { val: 0, name: 'Nastar Nanas Klasik',    price: 'Rp 75.000', unit: 'per 150 g', group: 'kering' },
-    'putrisalju':  { val: 0, name: 'Putri Salju Vanilla',    price: 'Rp 75.000', unit: 'per 150 g', group: 'kering' },
-    // Kue Basah
-    'brownies':    { val: 0, name: 'Brownies Fudgy Coklat',  price: 'Rp 65.000', unit: 'per 400 g', group: 'basah' },
-    'bolukukus':   { val: 0, name: 'Bolu Kukus Pandan',      price: 'Rp 45.000', unit: '6 pcs',     group: 'basah' },
-  };
-
-  const ROTI_MIN = 3;
-
-  function changeQty(id, delta) {
-    const item = qtys[id];
-    const newVal = Math.max(0, item.val + delta);
-    item.val = newVal;
-    document.getElementById('qty-' + id).textContent = newVal;
-    if (item.group === 'roti') updateRotiSummary();
-    if (item.group === 'kering') updateSingleOrderBtn(id);
-    if (item.group === 'basah') updateSingleOrderBtn(id);
-  }
-
-  function updateRotiSummary() {
-    const total = qtys['roti-sisir'].val + qtys['roti-kasur'].val + qtys['roti-sobek'].val;
-    const countEl = document.getElementById('rotiTotalCount');
-    const hintEl = document.getElementById('rotiHint');
-    const btn = document.getElementById('rotiOrderBtn');
-
-    countEl.textContent = total;
-
-    if (total >= ROTI_MIN) {
-      countEl.classList.remove('not-met');
-      hintEl.classList.remove('not-met');
-      hintEl.textContent = 'buah — siap dipesan! 🎉';
-      btn.classList.remove('disabled');
-      btn.disabled = false;
-    } else {
-      countEl.classList.add('not-met');
-      hintEl.classList.add('not-met');
-      const kurang = ROTI_MIN - total;
-      hintEl.textContent = `buah — tambahkan ${kurang} lagi untuk memesan`;
-      btn.classList.add('disabled');
-      btn.disabled = true;
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kue dan roti buatan tangan dengan bahan organik pilihan. Homemade premium dari Samarinda.">
+  <title>Dapur R&D | Kue Rumahan Premium Samarinda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2;
+      --cream-dark: #F2EDE3;
+      --brown: #6B4A2A;
+      --brown-light: #9B7558;
+      --brown-dark: #3D2810;
+      --rose: #C97B6B;
+      --rose-light: #E8BEB6;
+      --rose-pale: #F7EDE9;
+      --green: #4A6741;
+      --green-light: #EBF0E9;
+      --text-dark: #2A1F14;
+      --text-mid: #5C4A35;
+      --text-light: #9B8878;
+      --border: rgba(107, 74, 42, 0.15);
+      --shadow: 0 2px 20px rgba(107, 74, 42, 0.08);
+      --shadow-hover: 0 8px 40px rgba(107, 74, 42, 0.15);
     }
-  }
 
-  function updateSingleOrderBtn(id) {
-    const btn = document.getElementById('order-' + id);
-    if (!btn) return;
-    if (qtys[id].val > 0) {
-      btn.classList.remove('disabled');
-      btn.disabled = false;
-    } else {
-      btn.classList.add('disabled');
-      btn.disabled = true;
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-  }
 
-  function orderRoti() {
-    const lines = ['roti-sisir','roti-kasur','roti-sobek']
-      .filter(id => qtys[id].val > 0)
-      .map(id => `- ${qtys[id].name}: ${qtys[id].val} buah (${qtys[id].price} ${qtys[id].unit})`);
-    const total = qtys['roti-sisir'].val + qtys['roti-kasur'].val + qtys['roti-sobek'].val;
-    const msg = `Halo Kue Ibu! Saya ingin memesan Roti:\n${lines.join('\n')}\nTotal: ${total} buah`;
-    window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(msg), '_blank');
-  }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(250, 247, 242, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 2px 20px rgba(107,74,42,0.08);
+    }
 
-  function orderSingle(id, name, price, unit) {
-    const qty = qtys[id].val;
-    if (qty < 1) return;
-    const msg = `Halo Kue Ibu! Saya ingin memesan:\n- ${name}: ${qty} (${price} ${unit})`;
-    window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(msg), '_blank');
-  }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo .logo-kue { color: #FAF7F2; }
+    .nav-logo .logo-ibu { color: #D4950A; font-style: italic; }
+    nav.scrolled .nav-logo .logo-kue { color: var(--brown-dark); }
 
-  // ========= NAV scroll =========
-  const navbar = document.getElementById('navbar');
-  function updateNav() {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  }
-  window.addEventListener('scroll', updateNav);
-  updateNav();
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(250,247,242,0.85);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #FAF7F2; }
+    nav.scrolled .nav-links a { color: var(--text-mid); }
+    nav.scrolled .nav-links a:hover { color: var(--brown); }
 
-  // ========= TABS =========
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('panel-' + tab).classList.add('active');
-    btn.classList.add('active');
-    const notice = document.getElementById('minOrderNotice');
-    notice.classList.toggle('show', tab === 'roti');
-    triggerReveal();
-  }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      background: #D4950A;
+      color: white !important;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: #b57d08 !important; transform: translateY(-1px); }
+    nav.scrolled .nav-cta { background: #D4950A; color: white !important; }
 
-  // ========= SCROLL REVEAL =========
-  function triggerReveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 60);
-          observer.unobserve(entry.target);
-        }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1600&h=900&q=80');
+      background-size: cover;
+      background-position: center 60%;
+      z-index: 0;
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(30,18,8,0.72) 0%,
+        rgba(30,18,8,0.45) 55%,
+        rgba(30,18,8,0.15) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 6rem 2.5rem 3rem;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #D4950A;
+      background: rgba(212,149,10,0.15);
+      border: 1px solid rgba(212,149,10,0.4);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.6s ease both;
+      width: fit-content;
+    }
+    .hero-tag span { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #D4950A; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.12;
+      color: #FAF7F2;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em { font-style: italic; color: #D4950A; display: block; }
+
+    .hero-desc {
+      max-width: 460px;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(250,247,242,0.75);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-scroll span {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.45);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(250,247,242,0.4), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      background: #D4950A;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: #b57d08; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,149,10,0.4); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      background: transparent;
+      color: rgba(250,247,242,0.9);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 100px;
+      border: 1.5px solid rgba(250,247,242,0.35);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(250,247,242,0.7); background: rgba(250,247,242,0.08); }
+
+    /* FEATURES STRIP (dark brown bar) */
+    .features-strip {
+      background: #2A1608;
+      padding: 3.5rem 2.5rem;
+    }
+    .features-strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .feature-item { }
+    .feature-icon { font-size: 2rem; display: block; margin-bottom: 0.875rem; }
+    .feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #D4950A;
+      margin-bottom: 0.5rem;
+    }
+    .feature-desc {
+      font-size: 0.8125rem;
+      font-weight: 300;
+      color: rgba(250,247,242,0.55);
+      line-height: 1.6;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION */
+    section { padding: 5rem 2rem; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--brown-dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+
+    .section-desc {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 500px;
+    }
+
+    .section-header {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+
+    /* PRODUK */
+    #produk {
+      background: white;
+    }
+
+    /* TABS */
+    .product-tabs {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--brown-light); color: var(--brown); background: var(--cream); }
+    .tab-btn.active { background: var(--brown); border-color: var(--brown); color: var(--cream); }
+    .tab-btn .tab-count {
+      font-size: 0.75rem;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+    .tab-btn.active .tab-count { opacity: 0.8; }
+
+    /* MIN ORDER BANNER */
+    .min-order-notice {
+      max-width: 1100px;
+      margin: 0 auto 1.75rem;
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1.25rem;
+      background: #FFF8F0;
+      border: 1.5px solid rgba(186,117,23,0.25);
+      border-radius: 12px;
+      font-size: 0.875rem;
+      color: #854F0B;
+    }
+    .min-order-notice.show { display: flex; }
+    .min-order-notice .notice-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .min-order-notice strong { font-weight: 500; }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-panel { display: none; }
+    .product-panel.active { display: block; }
+
+    /* CARD */
+    .product-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+    .card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+    .badge-bestseller { background: var(--brown); color: var(--cream); }
+    .badge-new { background: var(--green); color: white; }
+    .badge-fav { background: var(--rose); color: white; }
+
+    .card-body {
+      padding: 1.25rem;
+    }
+
+    .card-cat {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.8375rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-price {
+      display: flex;
+      flex-direction: column;
+    }
+    .card-price strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+      line-height: 1;
+    }
+    .card-price span {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    /* Min order badge on card */
+    .card-min-order {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #854F0B;
+      background: #FFF3E0;
+      border: 1px solid rgba(186,117,23,0.2);
+      border-radius: 8px;
+      padding: 0.3rem 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===== QUANTITY COUNTER ===== */
+    .card-qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.875rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .qty-counter {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--brown);
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .qty-btn:hover { background: var(--cream-dark); color: var(--brown-dark); }
+    .qty-btn:active { background: var(--border); }
+    .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .qty-value {
+      min-width: 2rem;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--brown-dark);
+      user-select: none;
+    }
+
+    .card-order-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.625rem 1rem;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--brown);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .card-order-btn:hover { background: var(--brown); border-color: var(--brown); color: var(--cream); }
+    .card-order-btn:disabled,
+    .card-order-btn.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    /* Roti: total counter summary bar */
+    .roti-summary-bar {
+      max-width: 1100px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.875rem 1.25rem;
+      background: #F0FFF4;
+      border: 1.5px solid rgba(74,103,65,0.25);
+      border-radius: 12px;
+      flex-wrap: wrap;
+    }
+    .roti-summary-bar .summary-text {
+      font-size: 0.875rem;
+      color: #2E5E25;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .roti-summary-bar .summary-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2E5E25;
+    }
+    .roti-summary-bar .summary-count.not-met {
+      color: #854F0B;
+    }
+    .roti-summary-bar .summary-hint {
+      font-size: 0.8rem;
+      color: #5C8A52;
+      font-weight: 300;
+    }
+    .roti-summary-bar .summary-hint.not-met {
+      color: #9B6A1A;
+    }
+    .roti-order-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.625rem 1.25rem;
+      background: #4A6741;
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8375rem;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .roti-order-btn:hover { background: #3a5233; transform: translateY(-1px); }
+    .roti-order-btn:disabled,
+    .roti-order-btn.disabled {
+      background: #ccc;
+      opacity: 0.6;
+      pointer-events: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ABOUT */
+    #tentang { background: var(--cream); }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img {
+      width: 100%;
+      border-radius: 24px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: -1.5rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .about-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brown-dark);
+      line-height: 1;
+      display: block;
+    }
+    .about-badge-text { font-size: 0.75rem; color: var(--text-light); font-weight: 300; }
+
+    .about-content p {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-sig {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.0625rem;
+      color: var(--brown-light);
+      margin-top: 1.5rem;
+      display: block;
+    }
+
+    /* ORDER */
+    #pesan {
+      background: var(--brown-dark);
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    #pesan .section-label { color: var(--brown-light); }
+    #pesan .section-title { color: var(--cream); }
+    #pesan .section-title em { color: var(--rose-light); }
+    #pesan .section-desc { color: rgba(250,247,242,0.6); margin: 0 auto 2.5rem; max-width: 440px; }
+    #pesan .section-header { margin-bottom: 0; text-align: center; }
+
+    .order-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 1rem 2rem;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.2s;
+      margin-top: 2.5rem;
+    }
+    .order-wa-btn:hover { background: #1ebe5b; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.3); }
+    .order-wa-btn svg { width: 20px; height: 20px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--brown-dark);
+      border-top: 1px solid rgba(250,247,242,0.08);
+      padding: 2rem;
+      text-align: center;
+    }
+    footer p { font-size: 0.8rem; color: rgba(250,247,242,0.35); font-weight: 300; }
+    footer strong { color: rgba(250,247,242,0.6); font-weight: 400; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .features-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-badge { right: 0; }
+      .product-grid { grid-template-columns: 1fr; }
+      .product-tabs { gap: 0.375rem; }
+      .tab-btn { padding: 0.5rem 0.875rem; font-size: 0.8125rem; }
+      .roti-summary-bar { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+  </head>
+  <body>
+
+  <nav id="navbar">
+    <a href="#" class="nav-logo"><span class="logo-kue">Kue </span><span class="logo-ibu">Ibu</span></a>
+    <ul class="nav-links">
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#tentang">Tentang Kami</a></li>
+      <li><a href="#pesan" class="nav-cta">Pesan Sekarang</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="beranda">
+    <div class="hero-bg-img"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-tag"><span></span> ✦ Homemade &middot; Samarinda</div>
+      <h1>Dibuat dengan<br><em>Cinta &amp; Kehangatan</em></h1>
+      <p class="hero-desc">Setiap gigitan membawa kenangan rumah. Kue dan roti buatan tangan dengan bahan organik pilihan, resep warisan yang tak lekang oleh waktu.</p>
+      <div class="hero-actions">
+        <a href="#produk" class="btn-primary">Lihat Produk ↓</a>
+        <a href="#pesan" class="btn-outline">Pesan Sekarang</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES STRIP -->
+  <div class="features-strip">
+    <div class="features-strip-inner">
+      <div class="feature-item">
+        <span class="feature-icon">🌿</span>
+        <div class="feature-title">Bahan Organik</div>
+        <div class="feature-desc">Dipilih langsung dari sumber terpercaya, bebas bahan pengawet.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">👐</span>
+        <div class="feature-title">Buatan Tangan</div>
+        <div class="feature-desc">Setiap produk dibuat dengan perhatian dan ketelitian penuh.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📦</span>
+        <div class="feature-title">Kemasan Cantik</div>
+        <div class="feature-desc">Siap hadir sebagai hampers atau bingkisan untuk orang tersayang.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🚚</span>
+        <div class="feature-title">Pengiriman Lokal</div>
+        <div class="feature-desc">Melayani pengiriman di seluruh area Samarinda dan sekitarnya.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUK -->
+  <section id="produk">
+    <div class="section-header reveal">
+      <p class="section-label">Menu Unggulan</p>
+      <h2 class="section-title">Produk <em>Pilihan Ibu</em></h2>
+      <p class="section-desc">Semua produk dipanggang segar setiap hari. Pesan sehari sebelumnya untuk hasil terbaik.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="product-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('roti', this)">
+        🍞 Roti <span class="tab-count">(3 varian)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('kering', this)">
+        🍪 Kue Kering <span class="tab-count">(3 varian)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('basah', this)">
+        🎂 Kue Basah <span class="tab-count">(2 varian)</span>
+      </button>
+    </div>
+
+    <!-- MIN ORDER NOTICE -->
+    <div class="min-order-notice show" id="minOrderNotice">
+      <span class="notice-icon">ℹ️</span>
+      <div>
+        <strong>Minimal Pemesanan Roti: 3 buah.</strong>
+        Boleh varian yang sama atau kombinasi varian berbeda &mdash; total minimal 3 buah per pesanan.
+      </div>
+    </div>
+
+    <!-- TAB: ROTI -->
+    <div class="product-panel active" id="panel-roti">
+      <!-- Roti total summary bar -->
+      <div class="roti-summary-bar" id="rotiSummaryBar">
+        <div class="summary-text">
+          🛒 Total pesanan roti:
+          <span class="summary-count not-met" id="rotiTotalCount">0</span>
+          <span class="summary-hint not-met" id="rotiHint">buah &mdash; tambahkan minimal 3 untuk memesan</span>
+        </div>
+        <button class="roti-order-btn disabled" id="rotiOrderBtn" onclick="orderRoti()" disabled>Pesan via WhatsApp →</button>
+      </div>
+
+      <div class="product-grid">
+
+        <!-- Roti Sisir -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Sisir Mentega" loading="lazy">
+          <div class="card-body">
+            <p class="card-cat">Roti</p>
+            <h3 class="card-title">Roti Sisir Mentega</h3>
+            <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
+            <p class="card-desc">Roti manis klasik dengan olesan mentega gula yang harum dan lembut di mulut. Sempurna untuk sarapan.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 35.000</strong>
+                <span>per loaf</span>
+              </div>
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty('roti-sisir', -1)" aria-label="Kurangi">−</button>
+                <span class="qty-value" id="qty-roti-sisir">0</span>
+                <button class="qty-btn" onclick="changeQty('roti-sisir', 1)" aria-label="Tambah">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Roti Kasur Coklat -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Kasur Coklat" loading="lazy">
+          <div class="card-body">
+            <p class="card-cat">Roti</p>
+            <h3 class="card-title">Roti Kasur Coklat</h3>
+            <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
+            <p class="card-desc">Roti empuk isi coklat meler yang lembut dan harum. Favorit anak-anak dan seluruh keluarga.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 32.000</strong>
+                <span>per loaf</span>
+              </div>
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty('roti-kasur', -1)" aria-label="Kurangi">−</button>
+                <span class="qty-value" id="qty-roti-kasur">0</span>
+                <button class="qty-btn" onclick="changeQty('roti-kasur', 1)" aria-label="Tambah">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Roti Sobek Susu -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&h=450&q=80" alt="Roti Sobek Susu" loading="lazy">
+          <span class="card-badge badge-bestseller">Best Seller</span>
+          <div class="card-body">
+            <p class="card-cat">Roti</p>
+            <h3 class="card-title">Roti Sobek Susu</h3>
+            <div class="card-min-order">🛒 Min. pesan 3 buah (boleh mix varian)</div>
+            <p class="card-desc">Tekstur super fluffy dengan aroma susu yang khas. Bisa disobek satu per satu, cocok untuk berbagi.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 38.000</strong>
+                <span>per loaf</span>
+              </div>
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty('roti-sobek', -1)" aria-label="Kurangi">−</button>
+                <span class="qty-value" id="qty-roti-sobek">0</span>
+                <button class="qty-btn" onclick="changeQty('roti-sobek', 1)" aria-label="Tambah">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB: KUE KERING -->
+    <div class="product-panel" id="panel-kering">
+      <div class="product-grid">
+
+        <!-- Kastengel -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&h=450&q=80" alt="Kastengel Keju Premium" loading="lazy">
+          <span class="card-badge badge-bestseller">Best Seller</span>
+          <div class="card-body">
+            <p class="card-cat">Kue Kering</p>
+            <h3 class="card-title">Kastengel Keju Premium</h3>
+            <p class="card-desc">Kue keju renyah di luar, lumer di dalam. Taburan edam asli import yang bikin nagih setiap gigitan.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 85.000</strong>
+                <span>per 150 g</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty('kastengel', -1)" aria-label="Kurangi">−</button>
+                  <span class="qty-value" id="qty-kastengel">0</span>
+                  <button class="qty-btn" onclick="changeQty('kastengel', 1)" aria-label="Tambah">+</button>
+                </div>
+                <button class="card-order-btn disabled" id="order-kastengel" onclick="orderSingle('kastengel','Kastengel Keju Premium','Rp 85.000','per 150 g')" disabled>Pesan →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nastar -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1612875893280-26eadb98ba4a?auto=format&fit=crop&w=600&h=450&q=80" alt="Nastar Nanas Klasik" loading="lazy">
+          <div class="card-body">
+            <p class="card-cat">Kue Kering</p>
+            <h3 class="card-title">Nastar Nanas Klasik</h3>
+            <p class="card-desc">Nastar lembut dengan selai nanas buatan sendiri. Resep keluarga yang sudah teruji dan dicinta generasi.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 75.000</strong>
+                <span>per 150 g</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty('nastar', -1)" aria-label="Kurangi">−</button>
+                  <span class="qty-value" id="qty-nastar">0</span>
+                  <button class="qty-btn" onclick="changeQty('nastar', 1)" aria-label="Tambah">+</button>
+                </div>
+                <button class="card-order-btn disabled" id="order-nastar" onclick="orderSingle('nastar','Nastar Nanas Klasik','Rp 75.000','per 150 g')" disabled>Pesan →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Putri Salju -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&w=600&h=450&q=80" alt="Putri Salju Vanilla" loading="lazy">
+          <span class="card-badge badge-fav">Favorit</span>
+          <div class="card-body">
+            <p class="card-cat">Kue Kering</p>
+            <h3 class="card-title">Putri Salju Vanilla</h3>
+            <p class="card-desc">Kue bulan sabit bertabur gula halus. Lumer di mulut dengan aroma vanilla alami yang menggoda selera.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 75.000</strong>
+                <span>per 150 g</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty('putrisalju', -1)" aria-label="Kurangi">−</button>
+                  <span class="qty-value" id="qty-putrisalju">0</span>
+                  <button class="qty-btn" onclick="changeQty('putrisalju', 1)" aria-label="Tambah">+</button>
+                </div>
+                <button class="card-order-btn disabled" id="order-putrisalju" onclick="orderSingle('putrisalju','Putri Salju Vanilla','Rp 75.000','per 150 g')" disabled>Pesan →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB: KUE BASAH -->
+    <div class="product-panel" id="panel-basah">
+      <div class="product-grid">
+
+        <!-- Brownies -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&h=450&q=80" alt="Brownies Fudgy Coklat" loading="lazy">
+          <div class="card-body">
+            <p class="card-cat">Kue Basah</p>
+            <h3 class="card-title">Brownies Fudgy Coklat</h3>
+            <p class="card-desc">Tekstur fudgy yang legit dengan lapisan coklat leleh. Kaya rasa, cocok untuk segala kesempatan.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 65.000</strong>
+                <span>per 400 g</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty('brownies', -1)" aria-label="Kurangi">−</button>
+                  <span class="qty-value" id="qty-brownies">0</span>
+                  <button class="qty-btn" onclick="changeQty('brownies', 1)" aria-label="Tambah">+</button>
+                </div>
+                <button class="card-order-btn disabled" id="order-brownies" onclick="orderSingle('brownies','Brownies Fudgy Coklat','Rp 65.000','per 400 g')" disabled>Pesan →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bolu Kukus -->
+        <div class="product-card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&h=450&q=80" alt="Bolu Kukus Pandan" loading="lazy">
+          <span class="card-badge badge-new">New!</span>
+          <div class="card-body">
+            <p class="card-cat">Kue Basah</p>
+            <h3 class="card-title">Bolu Kukus Pandan</h3>
+            <p class="card-desc">Harum pandan alami, tekstur ringan dan lembut. Mekar sempurna, memuaskan selera keluarga.</p>
+            <div class="card-footer">
+              <div class="card-price">
+                <strong>Rp 45.000</strong>
+                <span>6 pcs</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty('bolukukus', -1)" aria-label="Kurangi">−</button>
+                  <span class="qty-value" id="qty-bolukukus">0</span>
+                  <button class="qty-btn" onclick="changeQty('bolukukus', 1)" aria-label="Tambah">+</button>
+                </div>
+                <button class="card-order-btn disabled" id="order-bolukukus" onclick="orderSingle('bolukukus','Bolu Kukus Pandan','Rp 45.000','6 pcs')" disabled>Pesan →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="tentang">
+    <div class="about-inner">
+      <div class="about-img-wrap reveal">
+        <img class="about-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&h=1000&q=80" alt="Ibu sedang membuat kue">
+        <div class="about-badge">
+          <span class="about-badge-num">10+</span>
+          <span class="about-badge-text">Tahun Pengalaman</span>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <p class="section-label">Cerita Kami</p>
+        <h2 class="section-title">Dari Dapur Rumah<br><em>ke Meja Makanmu</em></h2>
+        <p>Bermula dari dapur kecil yang penuh dengan aroma mentega dan gula, Ibu mulai memasak kue-kue istimewa untuk keluarga dan tetangga sekitar. Satu per satu resep warisan dipelajari, dijaga, dan disempurnakan dengan penuh cinta.</p>
+        <p>Dengan lebih dari satu dekade pengalaman, setiap produk yang kami buat selalu mengutamakan kualitas dan keikhlasan. Bahan-bahan segar dipilih setiap hari, dan proses pembuatan dilakukan dengan tangan yang penuh kasih sayang.</p>
+        <p>Kami percaya makanan terbaik bukan hanya soal resep yang tepat &mdash; tapi juga hati yang tulus di balik setiap adonan.</p>
+        <span class="about-sig">— Dapur R&D 🤍</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PESAN -->
+  <section id="pesan">
+    <div class="section-header reveal">
+      <p class="section-label">Siap Memesan?</p>
+      <h2 class="section-title">Pesan Langsung<br><em>via WhatsApp</em></h2>
+      <p class="section-desc">Hubungi kami untuk tanya ketersediaan, kustomisasi ukuran, atau paket hampers spesial. Kami siap melayani dengan sepenuh hati.</p>
+      <a href="https://wa.me/6281520432660?text=Halo%20Kue%20Ibu!%20Saya%20ingin%20memesan%20produk." class="order-wa-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.089.535 4.05 1.472 5.763L.036 23.8a.5.5 0 00.612.604l6.278-1.649A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.498-5.24-1.37l-.375-.22-3.875 1.017.97-3.75-.243-.388A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Chat WhatsApp Sekarang
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <strong>Dapur R&D</strong> &middot; Kue Rumahan Premium &middot; Samarinda, Kalimantan Timur &nbsp;·&nbsp; Dibuat dengan ❤️ untuk Ibu tercinta</p>
+  </footer>
+
+  <script>
+    // ========= STATE =========
+    const qtys = {
+      // Roti
+      'roti-sisir':  { val: 0, name: 'Roti Sisir Mentega',     price: 'Rp 35.000', unit: 'per loaf', group: 'roti' },
+      'roti-kasur':  { val: 0, name: 'Roti Kasur Coklat',      price: 'Rp 32.000', unit: 'per loaf', group: 'roti' },
+      'roti-sobek':  { val: 0, name: 'Roti Sobek Susu',        price: 'Rp 38.000', unit: 'per loaf', group: 'roti' },
+      // Kue Kering
+      'kastengel':   { val: 0, name: 'Kastengel Keju Premium', price: 'Rp 85.000', unit: 'per 150 g', group: 'kering' },
+      'nastar':      { val: 0, name: 'Nastar Nanas Klasik',    price: 'Rp 75.000', unit: 'per 150 g', group: 'kering' },
+      'putrisalju':  { val: 0, name: 'Putri Salju Vanilla',    price: 'Rp 75.000', unit: 'per 150 g', group: 'kering' },
+      // Kue Basah
+      'brownies':    { val: 0, name: 'Brownies Fudgy Coklat',  price: 'Rp 65.000', unit: 'per 400 g', group: 'basah' },
+      'bolukukus':   { val: 0, name: 'Bolu Kukus Pandan',      price: 'Rp 45.000', unit: '6 pcs',     group: 'basah' },
+    };
+
+    const ROTI_MIN = 3;
+
+    function changeQty(id, delta) {
+      const item = qtys[id];
+      const newVal = Math.max(0, item.val + delta);
+      item.val = newVal;
+      document.getElementById('qty-' + id).textContent = newVal;
+      if (item.group === 'roti') updateRotiSummary();
+      if (item.group === 'kering') updateSingleOrderBtn(id);
+      if (item.group === 'basah') updateSingleOrderBtn(id);
+    }
+
+    function updateRotiSummary() {
+      const total = qtys['roti-sisir'].val + qtys['roti-kasur'].val + qtys['roti-sobek'].val;
+      const countEl = document.getElementById('rotiTotalCount');
+      const hintEl = document.getElementById('rotiHint');
+      const btn = document.getElementById('rotiOrderBtn');
+
+      countEl.textContent = total;
+
+      if (total >= ROTI_MIN) {
+        countEl.classList.remove('not-met');
+        hintEl.classList.remove('not-met');
+        hintEl.textContent = 'buah — siap dipesan! 🎉';
+        btn.classList.remove('disabled');
+        btn.disabled = false;
+      } else {
+        countEl.classList.add('not-met');
+        hintEl.classList.add('not-met');
+        const kurang = ROTI_MIN - total;
+        hintEl.textContent = `buah — tambahkan ${kurang} lagi untuk memesan`;
+        btn.classList.add('disabled');
+        btn.disabled = true;
+      }
+    }
+
+    function updateSingleOrderBtn(id) {
+      const btn = document.getElementById('order-' + id);
+      if (!btn) return;
+      if (qtys[id].val > 0) {
+        btn.classList.remove('disabled');
+        btn.disabled = false;
+      } else {
+        btn.classList.add('disabled');
+        btn.disabled = true;
+      }
+    }
+
+    function orderRoti() {
+      const lines = ['roti-sisir','roti-kasur','roti-sobek']
+        .filter(id => qtys[id].val > 0)
+        .map(id => `- ${qtys[id].name}: ${qtys[id].val} buah (${qtys[id].price} ${qtys[id].unit})`);
+      const total = qtys['roti-sisir'].val + qtys['roti-kasur'].val + qtys['roti-sobek'].val;
+      const msg = `Halo Kue Ibu! Saya ingin memesan Roti:\n${lines.join('\n')}\nTotal: ${total} buah`;
+      window.open('https://wa.me/6281520432660?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    function orderSingle(id, name, price, unit) {
+      const qty = qtys[id].val;
+      if (qty < 1) return;
+      const msg = `Halo Kue Ibu! Saya ingin memesan:\n- ${name}: ${qty} (${price} ${unit})`;
+      window.open('https://wa.me/6281520432660?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    // ========= NAV scroll =========
+    const navbar = document.getElementById('navbar');
+    function updateNav() {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }
+    window.addEventListener('scroll', updateNav);
+    updateNav();
+
+    // ========= TABS =========
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + tab).classList.add('active');
+      btn.classList.add('active');
+      const notice = document.getElementById('minOrderNotice');
+      notice.classList.toggle('show', tab === 'roti');
+      triggerReveal();
+    }
+
+    // ========= SCROLL REVEAL =========
+    function triggerReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 60);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => {
+        if (!el.classList.contains('visible')) observer.observe(el);
       });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => {
-      if (!el.classList.contains('visible')) observer.observe(el);
-    });
-  }
+    }
 
-  triggerReveal();
-</script>
-</body>
-</html>
+    triggerReveal();
+  </script>
+  </body>
+  </html>
